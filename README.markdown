@@ -12,32 +12,6 @@ The repository contains the following files:
 - **model_dropout_info.json**: JSON file describing the architecture of the neural network with Dropout regularization.
 - **README.md**: This file, providing an overview and instructions for the project.
 
-## Prerequisites
-To run the project, you need the following dependencies:
-- **Python 3.x**
-- **Required Libraries**:
-  ```bash
-  pip install numpy matplotlib tensorflow
-  ```
-- **Input Files**:
-  - `data_X.npy`: Training features.
-  - `data_y.npy`: Training labels.
-  - `data_Xval.npy`: Validation features.
-  - `data_yval.npy`: Validation labels.
-  Ensure these files are placed in a `data` directory relative to the notebook.
-
-## Installation
-1. Clone the repository:
-   ```bash
-   git clone <repository-url>
-   cd <repository-directory>
-   ```
-2. Install the required Python packages:
-   ```bash
-   pip install numpy matplotlib tensorflow
-   ```
-3. Ensure the input `.npy` files are in the `data` directory.
-
 ## Usage
 The project is executed within the `goalkeeper.ipynb` Jupyter Notebook. Below is an overview of the workflow:
 
@@ -70,39 +44,6 @@ Two models are implemented to combat overfitting:
 - The decision boundaries of the `model_l1l2` are visualized using a custom `plt_decision_boundaries` function.
 - Training data points are plotted, with blue indicating successful throws (to teammates) and red indicating unsuccessful throws (to opponents).
 
-### 6. Submission
-- The notebook generates `model_l1l2_info.json` and `model_dropout_info.json`, which describe the architectures of the respective models.
-- A `result.zip` file is created containing:
-  - `model_l1l2_info.json`
-  - `model_dropout_info.json`
-  - `goalkeeper.ipynb`
-- The submission cell uses the following code to package the files:
-  ```python
-  import zipfile
-  import joblib
-
-  if not os.path.exists(os.path.join(os.getcwd(), 'goalkeeper.ipynb')):
-      %notebook -e goalkeeper.ipynb
-
-  def compress(file_names):
-      print("File Paths:")
-      print(file_names)
-      compression = zipfile.ZIP_DEFLATED
-      with zipfile.ZipFile("result.zip", mode="w") as zf:
-          for file_name in file_names:
-              zf.write('./' + file_name, file_name, compress_type=compression)
-
-  file_names = ['model_l1l2_info.json', 'model_dropout_info.json', 'goalkeeper.ipynb']
-  compress(file_names)
-  ```
-
-### Running the Notebook
-To execute the project:
-1. Open `goalkeeper.ipynb` in Jupyter Notebook or JupyterLab.
-2. Ensure the required libraries are installed and the input `.npy` files are in the `data` directory.
-3. Run all cells in the notebook to perform data loading, model training, visualization, and file generation.
-4. The final output (`result.zip`) will be generated in the working directory.
-
 ## Evaluation
 - The models' performance is evaluated using accuracy on the validation set.
 - The use of L1L2 and Dropout regularization improves generalization compared to a baseline model, as observed in the decision boundary visualization.
@@ -117,9 +58,3 @@ To execute the project:
 - The L1L2 model uses both L1 (lasso) and L2 (ridge) regularization to control model complexity.
 - The Dropout model randomly deactivates neurons, enhancing robustness.
 - Future improvements could include hyperparameter tuning (e.g., regularization strength, dropout rate) or experimenting with other regularization techniques like batch normalization.
-
-## Contributing
-Contributions are welcome! Please submit a pull request or open an issue to discuss improvements or bug fixes.
-
-## License
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
